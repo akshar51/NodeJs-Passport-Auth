@@ -1,0 +1,94 @@
+<%- include("./partials/header") %>
+<style>
+  .profile-pic-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-pic {
+  transition: 0.3s ease;
+}
+
+.profile-pic-wrapper:hover .profile-pic {
+  opacity: 0.6; /* make lighter on hover */
+}
+
+.edit-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #007bff;
+  color: white;
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  transition: 0.3s ease;
+  font-size: 18px;
+}
+
+.profile-pic-wrapper:hover .edit-icon {
+  opacity: 1;
+}
+
+</style>
+<div class="page-wrapper">
+  <div class="container-fluid">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+        <div class="card shadow-lg border rounded-4 p-4">
+          <h3 class="text-center mb-4">Edit Profile</h3>
+
+          <!-- Profile Image with hover effect -->
+          <div class="text-center mb-4">
+            <div class="profile-pic-wrapper">
+              <img 
+                src="<%= user.avatar || '/assets/images/users/1.jpg' %>" 
+                alt="Profile Picture"
+                class="profile-pic rounded-circle"
+                width="120" height="120"
+              />
+              <label for="avatar" class="edit-icon">
+                <i class="bi bi-camera-fill"></i>
+              </label>
+              <input type="file" id="avatar" name="avatar" class="d-none" accept="image/*" />
+            </div>
+          </div>
+
+          <form action="/settings" method="POST" enctype="multipart/form-data">
+            <div class="form-group mb-3">
+              <label for="username">Username</label>
+              <input 
+                type="text" 
+                id="username" 
+                name="username" 
+                class="form-control"
+                value="<%= user.username %>" 
+                required
+              />
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="email">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="form-control"
+                value="<%= user.email %>" 
+                required
+              />
+            </div>
+
+            <div class="mt-4 text-center">
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+              <a href="/profile" class="btn btn-secondary">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("./partials/footer") %>

@@ -33,11 +33,11 @@ exports.logout=(req,res)=>{
         return res.redirect('/');
     })
 }
-
+// middleware/auth.js
 module.exports.ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect("/login"); 
+  res.redirect("/login"); // redirect to login if not authenticated
 };
 
