@@ -11,6 +11,10 @@ module.exports.getEditProfile = (req, res) => {
   res.render("settings", { user: req.user });
 };
 
+module.exports.formPage = (req,res)=>{
+  res.render('pages/form-basic',{ user: req.user })
+}
+
 // POST Update Profile
 module.exports.postEditProfile = async (req, res) => {
   try {
@@ -36,7 +40,6 @@ module.exports.postEditProfile = async (req, res) => {
 
 module.exports.postEditProfile = async (req, res) => {
   try {
-    console.log(req.body)
     const { username, email } = req.body;
 
     let updateData = { username, email };
@@ -58,3 +61,4 @@ module.exports.postEditProfile = async (req, res) => {
     res.redirect("/settings");
   }
 };
+

@@ -29,6 +29,8 @@ router.get("/settings", ensureAuthenticated, userController.getEditProfile);
 // Save Edit Profile
 router.post("/settings",ensureAuthenticated,upload.single("avatar"),userController.postEditProfile);
 
+//Form page
+router.get('/form',ensureAuthenticated,userController.formPage)
 
 
 module.exports = router;
