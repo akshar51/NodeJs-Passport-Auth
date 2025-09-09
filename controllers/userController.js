@@ -15,6 +15,11 @@ module.exports.formPage = (req,res)=>{
   res.render('pages/form-basic',{ user: req.user })
 }
 
+module.exports.tablePage = (req,res)=>{
+  res.render('pages/tables',{user : req.user})
+}
+
+
 // POST Update Profile
 module.exports.postEditProfile = async (req, res) => {
   try {

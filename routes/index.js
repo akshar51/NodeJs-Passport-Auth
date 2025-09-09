@@ -33,4 +33,8 @@ router.post("/settings",ensureAuthenticated,upload.single("avatar"),userControll
 router.get('/form',ensureAuthenticated,userController.formPage)
 
 
+// Tables
+router.get('/table',ensureAuthenticated,userController.tablePage)
+
+
 module.exports = router;
