@@ -1,44 +1,51 @@
+//modules
 const express = require('express');
-const bodyParser = require('body-parser');
-const LocalStrategy = require('./middlewares/passport');
-const session = require('express-session');
-const passport = require('passport');
-const db = require('./configs/database');
-const port = 8081;
 const app = express();
-const path = require('path')
+const db = require('./configs/dbconnection');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+const cookieParser = require('cookie-parser');
+const session = require("express-session")
+const passport = require("./middlewares/passportMiddleWare");
+const flash = require('connect-flash');
 
-app.set('view engine','ejs');
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.json());
-app.use(express.static('public'));
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-
+//middlewares 
 app.use(session({
-    secret:'Abcd',
-    resave:false,
-    saveUninitialized:false,
-    cookie : {maxAge: 1000*60*60}
+    secret: "abcd",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false, maxAge: 1000*60*30 }
 }));
 
+
+app.use(passport.session()); 
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(flash()); // Flash middleware must come after session middleware
+app.use(passport.userData);
+app.use(passport.flashMiddleware); 
 
+app.set('view engine', 'ejs');
+app.set("views", "views");
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.use("/uploads", express.static(path.join(__dirname, 'uploads')));
+app.use(cookieParser());
 
-app.use('/',require('./routes'));
-app.get('/tables',(req,res)=>{
-    return res.render('./pages/tables')
-})
-app.get('/forms',(req,res)=>{
-    return res.render('./pages/form-basic')
-})
+//mainrouter
+const mainRouter = require('./router/index');
+app.use(mainRouter);
 
-app.listen(port,(err)=>{
-    if(!err){
+//run server
+// Check if running locally
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
         db();
-        console.log("server start");
-        console.log(`http://localhost:${port}`);
-                
-    }
-})
+        console.log(`Server is running on port ${PORT}`);
+        console.log("http://localhost:" + PORT);
+    });
+}
+
+// Export app for Vercel
+module.exports = app;

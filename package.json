@@ -1,34 +1,40 @@
 {
-  "name": "passport-blog-project",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.2",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "mongoose": "^8.18.1",
+    "multer": "^2.0.2",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
+  },
+  "name": "blog-passport-project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"node index.js",
-    "dev":"nodemon index.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PayalPatel03/passport-blog-project.git"
+    "url": "git+https://github.com/PayalPatel03/blog-passport-project.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/PayalPatel03/passport-blog-project/issues"
+    "url": "https://github.com/PayalPatel03/blog-passport-project/issues"
   },
-  "homepage": "https://github.com/PayalPatel03/passport-blog-project#readme",
-  "dependencies": {
-    "bcrypt": "^6.0.0",
-    "body-parser": "^2.2.0",
-    "ejs": "^3.1.10",
-    "express": "^5.1.0",
-    "express-session": "^1.18.2",
-    "mongoose": "^8.18.0",
-    "multer": "^2.0.2",
-    "passport": "^0.7.0",
-    "passport-local": "^1.0.0"
+  "homepage": "https://github.com/PayalPatel03/blog-passport-project#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
